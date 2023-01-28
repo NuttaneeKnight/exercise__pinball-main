@@ -28,7 +28,8 @@ export default function App() {
     const { name, value } = e.target;
     setLocation({ ...location, [name]: value.toString() });
   };
-
+  //http://pinballmap.com/api/v1/locations/6784/machine_details.json 
+  //6784 is the location id how to get that by lat and lon?
   const handleSubmit = () => {
     fetch(
       "https://pinballmap.com/api/v1/docs/1.0/locations/closest_by_lat_lon.json"
