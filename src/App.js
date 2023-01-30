@@ -30,6 +30,8 @@ export default function App() {
     setLocation({ ...location, [name]: value.toString() });
   };
 
+  
+
   const handleSubmit = () => {
     let lat = location["lat"];
     let lon = location["lon"];
@@ -50,9 +52,8 @@ export default function App() {
   return (
     <div className="App">
       <div className="manualInput">
-        <h1>Let's find the Pinball Location Near You!</h1>
-        <h5>Simply put your cordinates below ↓ Don't know your coordinates?</h5>
-        <h5>
+        <h1>Let's find the Pinball Locations Near You!</h1>
+        <h5>Simply put your cordinates below ↓ Don't know your coordinates?
           Just hit Near Me to auto-fill your cordinates, then hit Search 😁
         </h5>
 
@@ -88,7 +89,7 @@ export default function App() {
 
         <br />
         <div className="list">
-          <ol>
+          <ol key='list'>
             {lists.map((name) => (
               <li>{venue}, {town}: {name}</li>
             ))}
