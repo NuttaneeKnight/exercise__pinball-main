@@ -14,7 +14,7 @@ export default function App() {
   const setCurrentPosition = (pos) => {
     setLocation({
       lat: pos.coords.latitude.toString(),
-      lon: pos.coords.longitude.toString()
+      lon: pos.coords.longitude.toString(),
     });
   };
 
@@ -48,34 +48,47 @@ export default function App() {
       <div className="manualInput">
         <h1>Let's find the Pinball Location Near You!</h1>
         <h5>Simply put your cordinates below ↓ Don't know your coordinates?</h5>
-        <h5>Just hit Near Me to auto-fill your cordinates, then hit Search!</h5>
-        <br/>
-        <input
-          placeholder="latitude"
-          name="lat"
-          value={location["lat"]}
-          onChange={handleChange}
-        ></input>
-        <input
-          placeholder="longitude"
-          name="lon"
-          value={location["lon"]}
-          onChange={handleChange}
-        ></input>
-        <button onClick={findCurrentLocation}>Near Me</button>
-        <button onClick={handleSubmit}>Search</button>
-        <div className="autoFill">
-          
-          <div className='list'>
-            <ul>
-              {lists.map((name) => (
-                <ul>{name}</ul>
-              ))}
-            </ul>
-          </div>
+        <h5>Just hit Near Me to auto-fill your cordinates, then hit Search 😁</h5>
+
+        <div>
+          <br />
+          <input
+            class="m-1 rounded border border-secondary"
+            placeholder="Latitude"
+            name="lat"
+            value={location["lat"]}
+            onChange={handleChange}
+          ></input>
+          <input
+            class="m-1 rounded border border-secondary"
+            placeholder="Longitude"
+            name="lon"
+            value={location["lon"]}
+            onChange={handleChange}
+          ></input>
+        </div>
+
+        <div>
+          <button
+            class="btn btn-secondary btn-sm m-1"
+            onClick={findCurrentLocation}
+          >
+            Near Me
+          </button>
+          <button class="btn btn-primary btn-sm m-1" onClick={handleSubmit}>
+            Search
+          </button>
+        </div>
+
+        <br />
+        <div className="list">
+          <ol>
+            {lists.map((name) => (
+              <li>{name}</li>
+            ))}
+          </ol>
         </div>
       </div>
     </div>
   );
 }
-
