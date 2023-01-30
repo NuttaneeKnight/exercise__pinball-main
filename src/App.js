@@ -1,15 +1,14 @@
-import "./styles.css";
-
+import "./App.css";
 import React, { useEffect, useState } from "react";
 
 export default function App() {
   const [location, setLocation] = useState({ lat: "", lon: "" });
+  const [lists, setLists] = useState([]);
 
   const findCurrentLocation = () => {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(setCurrentPosition);
     }
-    handleSubmit();
   };
 
   const setCurrentPosition = (pos) => {
@@ -22,21 +21,24 @@ export default function App() {
   // without this, the inputs are one step behind
   useEffect(() => {
     console.log("location: ", location);
+    console.log("lists: ", lists);
   });
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setLocation({ ...location, [name]: value.toString() });
   };
-  //http://pinballmap.com/api/v1/locations/6784/machine_details.json 
-  //6784 is the location id how to get that by lat and lon?
+
   const handleSubmit = () => {
+    let lat = location["lat"];
+    let lon = location["lon"];
     fetch(
-      "https://pinballmap.com/api/v1/docs/1.0/locations/closest_by_lat_lon.json"
+      `https://pinballmap.com/api/v1/locations/closest_by_lat_lon.json?lat=${lat}&lon=${lon}`
     )
       .then((res) => res.json())
       .then((data) => {
         console.log("data: ", data);
+        if (data && data.location) setLists(data.location.machine_names);
       })
       .catch((err) => alert(err));
   };
@@ -49,21 +51,27 @@ export default function App() {
         <input
           placeholder="latitude"
           name="lat"
+          value={location["lat"]}
           onChange={handleChange}
         ></input>
         <input
           placeholder="longitude"
           name="lon"
+          value={location["lon"]}
           onChange={handleChange}
         ></input>
+        <button onClick={findCurrentLocation}>Near Me</button>
         <button onClick={handleSubmit}>Search</button>
         <div className="autoFill">
           <h2>Don't know your coordinates?</h2>
-          <h3>Just hit Near Me</h3>
-          <button onClick={findCurrentLocation}>Near Me</button>
-          {/* {location.map((loc) => (
-            <li>{loc.name}</li>
-          ))} */}
+          <h3>Just hit Near Me To Auto-fill your cordinates then hit Search!</h3>
+          <div>
+            <ul>
+              {lists.map((name) => (
+                <ul>{name}</ul>
+              ))}
+            </ul>
+          </div>
         </div>
       </div>
     </div>
