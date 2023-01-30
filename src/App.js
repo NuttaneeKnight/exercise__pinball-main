@@ -47,7 +47,9 @@ export default function App() {
     <div className="App">
       <div className="manualInput">
         <h1>Let's find the Pinball Location Near You!</h1>
-        <h2>Simply put your cordinates below ↓</h2>
+        <h5>Simply put your cordinates below ↓ Don't know your coordinates?</h5>
+        <h5>Just hit Near Me to auto-fill your cordinates, then hit Search!</h5>
+        <br/>
         <input
           placeholder="latitude"
           name="lat"
@@ -63,9 +65,8 @@ export default function App() {
         <button onClick={findCurrentLocation}>Near Me</button>
         <button onClick={handleSubmit}>Search</button>
         <div className="autoFill">
-          <h2>Don't know your coordinates?</h2>
-          <h3>Just hit Near Me To Auto-fill your cordinates then hit Search!</h3>
-          <div>
+          
+          <div className='list'>
             <ul>
               {lists.map((name) => (
                 <ul>{name}</ul>
