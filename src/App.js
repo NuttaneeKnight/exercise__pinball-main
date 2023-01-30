@@ -3,7 +3,9 @@ import React, { useEffect, useState } from "react";
 
 export default function App() {
   const [location, setLocation] = useState({ lat: "", lon: "" });
+  const [venue, setVenue] = useState([]);
   const [lists, setLists] = useState([]);
+  const [town, setTown] = useState([]);
 
   const findCurrentLocation = () => {
     if (navigator.geolocation) {
@@ -14,10 +16,9 @@ export default function App() {
   const setCurrentPosition = (pos) => {
     setLocation({
       lat: pos.coords.latitude.toString(),
-      lon: pos.coords.longitude.toString(),
+      lon: pos.coords.longitude.toString()
     });
   };
-
   // without this, the inputs are one step behind
   useEffect(() => {
     console.log("location: ", location);
@@ -37,8 +38,11 @@ export default function App() {
     )
       .then((res) => res.json())
       .then((data) => {
-        console.log("data: ", data);
-        if (data && data.location) setLists(data.location.machine_names);
+        // console.log("data: ", data);
+        if (data && data.location) 
+        setLists(data.location.machine_names);
+        setVenue(data.location.name);
+        setTown(data.location.city);
       })
       .catch((err) => alert(err));
   };
@@ -48,7 +52,9 @@ export default function App() {
       <div className="manualInput">
         <h1>Let's find the Pinball Location Near You!</h1>
         <h5>Simply put your cordinates below ↓ Don't know your coordinates?</h5>
-        <h5>Just hit Near Me to auto-fill your cordinates, then hit Search 😁</h5>
+        <h5>
+          Just hit Near Me to auto-fill your cordinates, then hit Search 😁
+        </h5>
 
         <div>
           <br />
@@ -84,7 +90,7 @@ export default function App() {
         <div className="list">
           <ol>
             {lists.map((name) => (
-              <li>{name}</li>
+              <li>{venue}, {town}: {name}</li>
             ))}
           </ol>
         </div>
