@@ -61,14 +61,14 @@ export default function App() {
           <br />
           <input
             class="m-1 rounded border border-secondary text-secondary"
-            placeholder="Latitude"
+            placeholder="Lat: 00.0000000"
             name="lat"
             value={location["lat"]}
             onChange={handleChange}
           ></input>
           <input
             class="m-1 rounded border border-secondary text-secondary"
-            placeholder="Longitude"
+            placeholder="Long: -00.0000000"
             name="lon"
             value={location["lon"]}
             onChange={handleChange}
