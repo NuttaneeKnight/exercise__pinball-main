@@ -53,14 +53,14 @@ export default function App() {
         <div>
           <br />
           <input
-            class="m-1 rounded border border-secondary"
+            class="m-1 rounded border border-secondary text-secondary"
             placeholder="Latitude"
             name="lat"
             value={location["lat"]}
             onChange={handleChange}
           ></input>
           <input
-            class="m-1 rounded border border-secondary"
+            class="m-1 rounded border border-secondary text-secondary"
             placeholder="Longitude"
             name="lon"
             value={location["lon"]}
